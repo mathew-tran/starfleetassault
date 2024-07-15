@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://brw8xu4gu6u2x"]
+
+[ext_resource type="PackedScene" uid="uid://d4ggjwqlltet8" path="res://Prefabs/Player.tscn" id="1_ki5ff"]
+[ext_resource type="Texture2D" uid="uid://cihfvw6j0orrq" path="res://Art/Asteroid.svg" id="2_wyry6"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ki5ff")]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(186, 172)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_wyry6")
+
+[node name="BulletGroup" type="Node2D" parent="." groups=["Bullets"]]
