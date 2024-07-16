@@ -2,7 +2,8 @@ extends Area2D
 
 class_name Player
 
-var MoveSpeed = 200
+var MoveSpeed = 500
+var BoostSpeedModifier = 1000
 @onready var SmokeParticle = $SmokeParticles
 
 var Cannons : Array[Node2D]
@@ -18,18 +19,30 @@ func _physics_process(delta):
 
 func Move(delta):
 	var targetPosition = get_global_mouse_position()
+	var direction = (targetPosition - global_position).normalized()
+	rotation_degrees = rad_to_deg(direction.angle())
+
+	if Input.is_action_pressed("stop"):
+		return
+
+
 
 	if targetPosition.distance_to(global_position) < MoveSpeed / 5:
 		return
 
-	var direction = (targetPosition - global_position).normalized()
-	rotation_degrees = rad_to_deg(direction.angle())
-	global_position += direction * MoveSpeed * delta
+	var SpeedToMove = MoveSpeed
+	if HasSpeedBoost():
+		SpeedToMove += BoostSpeedModifier
+	global_position += direction * SpeedToMove * delta
 	SmokeParticle.emitting = true
 
 func _input(event):
 	if event.is_action_pressed("left_click"):
 		Shoot()
+	if event.is_action_pressed("right_click"):
+		if CanBoost():
+			$SpeedTimer.start()
+			scale = Vector2(1,.5)
 
 func Shoot():
 	for cannon in Cannons:
@@ -37,3 +50,23 @@ func Shoot():
 		instance.global_position = cannon.global_position
 		instance.rotation_degrees = rotation_degrees
 		Groups.GetBullets().add_child(instance)
+
+func CanBoost():
+	return $SpeedTimer.time_left == 0.0 and $SpeedCooldownTimer.time_left == 0.0
+
+func HasSpeedBoost():
+	return $SpeedTimer.time_left != 0.0
+
+func _on_speed_timer_timeout():
+	modulate = Color.DARK_GRAY
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate", Color.LIGHT_GRAY, $SpeedCooldownTimer.wait_time)
+
+	$SpeedCooldownTimer.start()
+	scale = Vector2(1,.7)
+
+
+
+func _on_speed_cooldown_timer_timeout():
+	scale = Vector2(1,1)
+	modulate = Color.WHITE

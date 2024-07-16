@@ -17,6 +17,7 @@ rotation = 1.5708
 texture = ExtResource("1_g33fe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 
 [node name="SmokeParticles" type="CPUParticles2D" parent="."]
 position = Vector2(-40, 0)
@@ -35,3 +36,14 @@ position = Vector2(12, -18)
 
 [node name="Cannon2" type="Marker2D" parent="."]
 position = Vector2(12, 18)
+
+[node name="SpeedTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="SpeedCooldownTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
+[connection signal="timeout" from="SpeedCooldownTimer" to="." method="_on_speed_cooldown_timer_timeout"]
