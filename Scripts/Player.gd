@@ -16,6 +16,7 @@ func _ready():
 
 func _physics_process(delta):
 	Move(delta)
+	SmokeParticle.emitting = true
 
 func Move(delta):
 	var targetPosition = get_global_mouse_position()
@@ -34,7 +35,7 @@ func Move(delta):
 	if HasSpeedBoost():
 		SpeedToMove += BoostSpeedModifier
 	global_position += direction * SpeedToMove * delta
-	SmokeParticle.emitting = true
+
 
 func _input(event):
 	if event.is_action_pressed("left_click"):
