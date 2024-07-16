@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://brw8xu4gu6u2x"]
+[gd_scene load_steps=10 format=3 uid="uid://brw8xu4gu6u2x"]
 
 [ext_resource type="PackedScene" uid="uid://d4ggjwqlltet8" path="res://Prefabs/Player.tscn" id="1_ki5ff"]
-[ext_resource type="Texture2D" uid="uid://cihfvw6j0orrq" path="res://Art/Asteroid.svg" id="2_wyry6"]
 [ext_resource type="Texture2D" uid="uid://b2bol1qqtgbpy" path="res://Art/StarBackground.svg" id="3_8a8sv"]
-[ext_resource type="Texture2D" uid="uid://b1j1d7k7f0mpt" path="res://Art/PlayerShip.svg" id="3_psptq"]
 [ext_resource type="Material" uid="uid://dfx47r7pfwrsd" path="res://Shader/ScrollTexture.tres" id="3_rhn0w"]
 [ext_resource type="Script" path="res://Scripts/BG.gd" id="5_8cl1u"]
+[ext_resource type="PackedScene" uid="uid://b6gb8718hhxr7" path="res://Prefabs/UI/UI.tscn" id="5_kdaxl"]
 [ext_resource type="Texture2D" uid="uid://q53v3lemwsoh" path="res://Art/StarBackground2.svg" id="6_x8280"]
+[ext_resource type="PackedScene" uid="uid://tt4stfr7sib" path="res://Prefabs/Enemies/Enemy_Base.tscn" id="7_j5mrq"]
 
 [sub_resource type="Shader" id="Shader_417ap"]
 code = "shader_type canvas_item;
@@ -38,9 +38,6 @@ shader_parameter/scroll_speed_x = 0.5
 shader_parameter/scroll_speed_y = 4.75e-07
 shader_parameter/time = 31.461
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw01x"]
-bg_color = Color(0, 0, 0, 1)
-
 [node name="Level" type="Node2D"]
 
 [node name="BG" type="TextureRect" parent="."]
@@ -61,114 +58,13 @@ offset_bottom = 1080.0
 texture = ExtResource("6_x8280")
 script = ExtResource("5_8cl1u")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" parent="." instance=ExtResource("5_kdaxl")]
 
-[node name="Panel" type="Panel" parent="UI"]
-custom_minimum_size = Vector2(1920, 120)
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tw01x")
+[node name="EnemyGroup" type="Node2D" parent="."]
+position = Vector2(1417, 447)
 
-[node name="RoundName" type="Label" parent="UI/Panel"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-offset_left = 1738.0
-offset_top = 40.0
-offset_right = 1898.0
-offset_bottom = 82.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "ROUND 1"
-horizontal_alignment = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Panel"]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 0
-offset_left = 20.0
-offset_top = 23.0
-offset_right = 620.0
-offset_bottom = 103.0
-scale = Vector2(0.7, 0.7)
-theme_override_constants/separation = 15
-
-[node name="Sprite2D" type="TextureRect" parent="UI/Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_psptq")
-stretch_mode = 3
-
-[node name="Sprite2D2" type="TextureRect" parent="UI/Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_psptq")
-stretch_mode = 3
-
-[node name="Sprite2D3" type="TextureRect" parent="UI/Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_psptq")
-stretch_mode = 3
-
-[node name="Sprite2D4" type="TextureRect" parent="UI/Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_psptq")
-stretch_mode = 3
-
-[node name="Label" type="Label" parent="UI/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -48.0
-offset_right = 91.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-text = "PLAYER SCORE"
-
-[node name="HighScore" type="Label" parent="UI/Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -6.0
-offset_right = 91.0
-offset_bottom = 36.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "10000"
-horizontal_alignment = 1
-
-[node name="Panel2" type="Panel" parent="UI"]
-custom_minimum_size = Vector2(1920, 60)
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -60.0
-offset_right = 960.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_tw01x")
+[node name="Area2D" parent="EnemyGroup" instance=ExtResource("7_j5mrq")]
 
 [node name="Player" parent="." instance=ExtResource("1_ki5ff")]
-
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(186, 172)
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("2_wyry6")
 
 [node name="BulletGroup" type="Node2D" parent="." groups=["Bullets"]]

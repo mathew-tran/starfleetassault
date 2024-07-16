@@ -6,3 +6,9 @@ func DegreesToUnitCircle(degrees: float) -> Vector2:
 	var x = cos(radians)
 	var y = sin(radians)
 	return Vector2(x, y)
+
+func GetPlayerBulletLayer():
+	return 4
+
+func GetEnemyBulletLayer():
+	return 5

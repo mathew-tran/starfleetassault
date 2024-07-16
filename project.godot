@@ -44,6 +44,13 @@ right_click={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="PlayerBullet"
+2d_physics/layer_5="EnemyBullet"
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.00392157, 0, 0.129412, 1)

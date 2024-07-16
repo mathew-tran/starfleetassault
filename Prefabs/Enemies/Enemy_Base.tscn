@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://tt4stfr7sib"]
+
+[ext_resource type="Script" path="res://Scripts/Enemies/EnemyBase.gd" id="1_anmqw"]
+[ext_resource type="Texture2D" uid="uid://cv3bgqm1ik07a" path="res://Art/Enemy/Enemy_Bolt.svg" id="1_tskxa"]
+[ext_resource type="PackedScene" uid="uid://xwc08pmq31gt" path="res://Prefabs/FX/ExplodeParticle.tscn" id="2_n4n22"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="3_1og8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tq3x5"]
+size = Vector2(96, 96)
+
+[node name="Bolt" type="Area2D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_anmqw")
+DeathParticle = ExtResource("2_n4n22")
+metadata/_edit_group_ = true
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_1og8c")
+Amount = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tskxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tq3x5")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
