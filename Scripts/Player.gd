@@ -10,9 +10,23 @@ var Cannons : Array[Node2D]
 
 var BulletClass = preload("res://Prefabs/Bullets/BaseBullet.tscn")
 
+var Health : HealthComponent
+
+
 func _ready():
 	Cannons.append($Cannon1)
 	Cannons.append($Cannon2)
+
+	Health = $HealthComponent as HealthComponent
+	Health.Setup()
+	Health.OnTakeDamage.connect(OnTakeDamage)
+	Health.OnDeath.connect(OnDeath)
+
+func OnTakeDamage(healthComponent):
+	pass
+
+func OnDeath(healthComponent):
+	pass
 
 func _physics_process(delta):
 	Move(delta)
@@ -71,3 +85,8 @@ func _on_speed_timer_timeout():
 func _on_speed_cooldown_timer_timeout():
 	scale = Vector2(1,1)
 	modulate = Color.WHITE
+
+
+func _on_area_entered(area):
+	if area.has_method("GetDamage"):
+		pass
