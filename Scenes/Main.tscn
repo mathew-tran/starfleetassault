@@ -58,8 +58,6 @@ offset_bottom = 1080.0
 texture = ExtResource("6_x8280")
 script = ExtResource("5_8cl1u")
 
-[node name="UI" parent="." instance=ExtResource("5_kdaxl")]
-
 [node name="EnemyGroup" type="Node2D" parent="."]
 position = Vector2(1417, 447)
 
@@ -68,3 +66,5 @@ position = Vector2(1417, 447)
 [node name="Player" parent="." instance=ExtResource("1_ki5ff")]
 
 [node name="BulletGroup" type="Node2D" parent="." groups=["Bullets"]]
+
+[node name="UI" parent="." instance=ExtResource("5_kdaxl")]

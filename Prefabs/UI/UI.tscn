@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b6gb8718hhxr7"]
 
-[ext_resource type="Texture2D" uid="uid://b1j1d7k7f0mpt" path="res://Art/PlayerShip.svg" id="1_m0dom"]
+[ext_resource type="PackedScene" uid="uid://cum6abwkhdrdd" path="res://Prefabs/UI/LifeContainer.tscn" id="1_5h5d8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw01x"]
 bg_color = Color(0, 0, 0, 1)
@@ -28,35 +28,12 @@ theme_override_font_sizes/font_size = 30
 text = "ROUND 1"
 horizontal_alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-custom_minimum_size = Vector2(600, 0)
+[node name="LifeContainer" parent="Panel" instance=ExtResource("1_5h5d8")]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 23.0
-offset_right = 620.0
-offset_bottom = 103.0
-scale = Vector2(0.7, 0.7)
-theme_override_constants/separation = 15
-
-[node name="Sprite2D" type="TextureRect" parent="Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_m0dom")
-stretch_mode = 3
-
-[node name="Sprite2D2" type="TextureRect" parent="Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_m0dom")
-stretch_mode = 3
-
-[node name="Sprite2D3" type="TextureRect" parent="Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_m0dom")
-stretch_mode = 3
-
-[node name="Sprite2D4" type="TextureRect" parent="Panel/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("1_m0dom")
-stretch_mode = 3
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 600.0
+offset_bottom = 80.0
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 1

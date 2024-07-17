@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://0po0i7a5tpd7"]
+
+[ext_resource type="Texture2D" uid="uid://b1j1d7k7f0mpt" path="res://Art/PlayerShip.svg" id="1_0siof"]
+
+[node name="LifeUI" type="TextureRect"]
+texture = ExtResource("1_0siof")
+stretch_mode = 3

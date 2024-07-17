@@ -36,3 +36,6 @@ func _on_area_entered(area):
 		if area is Bullet:
 			area.queue_free()
 		print("hit")
+
+func GetDamage():
+	return 1

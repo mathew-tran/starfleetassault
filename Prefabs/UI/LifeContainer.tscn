@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cum6abwkhdrdd"]
+
+[ext_resource type="Script" path="res://Scripts/UI/LifeContainer.gd" id="1_pnhjw"]
+[ext_resource type="PackedScene" uid="uid://0po0i7a5tpd7" path="res://Prefabs/UI/LifeUI.tscn" id="2_g44ym"]
+
+[node name="LifeContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(600, 0)
+offset_left = 20.0
+offset_top = 23.0
+offset_right = 620.0
+offset_bottom = 103.0
+scale = Vector2(0.7, 0.7)
+theme_override_constants/separation = 15
+script = ExtResource("1_pnhjw")
+
+[node name="LifeUI" parent="." instance=ExtResource("2_g44ym")]
+layout_mode = 2

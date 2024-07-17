@@ -11,7 +11,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6605"]
 size = Vector2(79, 50)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["Player"]]
 position = Vector2(877, 445)
 collision_layer = 2
 collision_mask = 21
