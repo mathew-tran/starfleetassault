@@ -21,6 +21,7 @@ signal StateUpdate(newState)
 
 var FollowPath
 
+var GridPosition = -1
 @export var DeathParticle : PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -81,6 +82,9 @@ func AIFollowPath(delta):
 
 	ChangeState(STATE.IDLE)
 
+func IsIdle():
+	return CurrentState == STATE.IDLE
+
 func _on_area_entered(area):
 	if area.has_method("GetDamage"):
 		Health.TakeDamage(area.GetDamage())
@@ -102,6 +106,9 @@ func Command_Attack(newPosition):
 func Command_FollowPath(newPath :Path2D):
 	ChangeState(STATE.FOLLOW_PATH)
 	FollowPath = newPath
+
+func Command_SetGridPosition(index):
+	GridPosition = index
 
 func ChangeState(newState : STATE):
 	CurrentState = newState

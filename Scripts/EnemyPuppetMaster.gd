@@ -39,11 +39,13 @@ func _process(delta):
 
 func Form():
 	CurrentState = PUPPET_STATE.IN_PROCESS
+	var index = 0
 	for enemy in Enemies.get_children():
 		enemy.Command_FollowPath(EntryPathRef)
+		enemy.Command_SetGridPosition(index)
+		index += 1
 
-	FormTimer.wait_time = Enemies.get_child_count() * .5
-	await FormTimer.timeout
+	await $FormTimer.timeout
 	CurrentState = PUPPET_STATE.FORMED
 
 func Formed():

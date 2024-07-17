@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://brw8xu4gu6u2x"]
+[gd_scene load_steps=12 format=3 uid="uid://brw8xu4gu6u2x"]
 
 [ext_resource type="PackedScene" uid="uid://d4ggjwqlltet8" path="res://Prefabs/Player.tscn" id="1_ki5ff"]
 [ext_resource type="Texture2D" uid="uid://b2bol1qqtgbpy" path="res://Art/StarBackground.svg" id="3_8a8sv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://q53v3lemwsoh" path="res://Art/StarBackground2.svg" id="6_x8280"]
 [ext_resource type="PackedScene" uid="uid://tt4stfr7sib" path="res://Prefabs/Enemies/Enemy_Base.tscn" id="7_j5mrq"]
 [ext_resource type="PackedScene" uid="uid://dgfkk81gutshc" path="res://Prefabs/Enemies/EnemyPuppetMaster.tscn" id="8_8hr2p"]
+[ext_resource type="Script" path="res://Scripts/Enemies/EnemyGrid.gd" id="9_2ebcp"]
 
 [sub_resource type="Shader" id="Shader_417ap"]
 code = "shader_type canvas_item;
@@ -82,3 +83,7 @@ position = Vector2(273, 0)
 [node name="UI" parent="." instance=ExtResource("5_kdaxl")]
 
 [node name="PuppetMaster" parent="." instance=ExtResource("8_8hr2p")]
+
+[node name="EnemyGrid" type="Node2D" parent="."]
+position = Vector2(1690, 447)
+script = ExtResource("9_2ebcp")
