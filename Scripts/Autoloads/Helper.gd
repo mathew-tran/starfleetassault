@@ -24,3 +24,10 @@ func GetEnemies():
 	if result:
 		return result[0]
 	return null
+
+func GetEntryPaths():
+	var result = get_tree().get_nodes_in_group("EntryPaths")
+	if result:
+		return result[0]
+	return null
+

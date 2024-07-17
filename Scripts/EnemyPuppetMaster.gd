@@ -5,6 +5,8 @@ var Enemies
 var PlayerReference : Player
 @onready var FormTimer = $FormTimer
 
+var EntryPathClass = preload("res://Prefabs/EntryPath/EntryPath1.tscn")
+var EntryPathRef
 enum PUPPET_STATE {
 	INIT,
 	FORM,
@@ -19,6 +21,8 @@ func _ready():
 	PlayerReference = Helper.GetPlayer()
 
 	CurrentState = PUPPET_STATE.FORM
+	EntryPathRef = EntryPathClass.instantiate()
+	Helper.GetEntryPaths().add_child(EntryPathRef)
 
 func _process(delta):
 	match CurrentState:
@@ -36,10 +40,9 @@ func _process(delta):
 func Form():
 	CurrentState = PUPPET_STATE.IN_PROCESS
 	for enemy in Enemies.get_children():
-		enemy.Command_MoveToPosition(PlayerReference.global_position)
+		enemy.Command_FollowPath(EntryPathRef)
 
 	FormTimer.wait_time = Enemies.get_child_count() * .5
-	FormTimer.start()
 	await FormTimer.timeout
 	CurrentState = PUPPET_STATE.FORMED
 

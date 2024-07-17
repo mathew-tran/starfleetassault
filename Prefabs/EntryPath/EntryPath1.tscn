@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://deajh8x5ilfqh"]
+
+[sub_resource type="Curve2D" id="Curve2D_xgsu2"]
+bake_interval = 512.0
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 368, 76.8796, -92.6535, -76.8796, 92.6535, 599.902, 846.437, -9.94912, 61.472, 9.94912, -61.472, 1055.84, 1072, -45.2233, 32.0724, 45.2233, -32.0724, 1605.14, 910.318, -40.701, 40.0904, 40.701, -40.0904, 1884.26, 496, -35.2742, 32.9633, 35.2742, -32.9633, 1552, -96, -73.2617, -125.617, 73.2617, 125.617, 608, -80, 0, 0, 0, 0, 536.041, 224)
+}
+point_count = 8
+
+[node name="EntryPath1" type="Path2D"]
+scale = Vector2(0.985, 1)
+curve = SubResource("Curve2D_xgsu2")

@@ -10,13 +10,16 @@ var MoveSpeed = 400
 enum STATE {
 	IDLE,
 	MOVE,
+	FOLLOW_PATH,
+	IN_PROCESS,
 	START_ATTACK,
-	ATTACKING
 }
 
 var CurrentState = STATE.IDLE
 
 signal StateUpdate(newState)
+
+var FollowPath
 
 @export var DeathParticle : PackedScene
 # Called when the node enters the scene tree for the first time.
@@ -48,6 +51,8 @@ func _process(delta):
 			AIMove(delta)
 		STATE.START_ATTACK:
 			AIAttack(delta)
+		STATE.FOLLOW_PATH:
+			AIFollowPath(delta)
 
 func AIMove(delta):
 	if global_position.distance_to(TargetPosition) < 2:
@@ -58,9 +63,22 @@ func AIMove(delta):
 		global_position += direction * delta * MoveSpeed
 
 func AIAttack(delta):
-	CurrentState = STATE.ATTACKING
+	CurrentState = STATE.IN_PROCESS
 	var timer = get_tree().create_timer(1)
 	await timer.timeout
+	ChangeState(STATE.IDLE)
+
+func AIFollowPath(delta):
+	CurrentState = STATE.IN_PROCESS
+	print(FollowPath.curve.get_baked_points())
+	for path in FollowPath.curve.get_baked_points():
+		var tween = get_tree().create_tween()
+		var distance = global_position.distance_to(path)
+		var time = distance / MoveSpeed
+		tween.tween_property(self, "global_position", path, time)
+		await tween.finished
+		print(path)
+
 	ChangeState(STATE.IDLE)
 
 func _on_area_entered(area):
@@ -80,6 +98,10 @@ func Command_MoveToPosition(newPosition):
 func Command_Attack(newPosition):
 	ChangeState(STATE.START_ATTACK)
 	TargetPosition = newPosition
+
+func Command_FollowPath(newPath :Path2D):
+	ChangeState(STATE.FOLLOW_PATH)
+	FollowPath = newPath
 
 func ChangeState(newState : STATE):
 	CurrentState = newState
