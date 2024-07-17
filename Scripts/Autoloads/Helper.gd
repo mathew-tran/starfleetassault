@@ -18,3 +18,9 @@ func GetPlayer():
 	if result:
 		return result[0]
 	return null
+
+func GetEnemies():
+	var result = get_tree().get_nodes_in_group("Enemies")
+	if result:
+		return result[0]
+	return null

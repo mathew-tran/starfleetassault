@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tq3x5"]
 size = Vector2(96, 96)
 
-[node name="Bolt" type="Area2D"]
+[node name="Bolt" type="Area2D" groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_anmqw")

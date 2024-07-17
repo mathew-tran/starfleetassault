@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b6gb8718hhxr7" path="res://Prefabs/UI/UI.tscn" id="5_kdaxl"]
 [ext_resource type="Texture2D" uid="uid://q53v3lemwsoh" path="res://Art/StarBackground2.svg" id="6_x8280"]
 [ext_resource type="PackedScene" uid="uid://tt4stfr7sib" path="res://Prefabs/Enemies/Enemy_Base.tscn" id="7_j5mrq"]
-[ext_resource type="PackedScene" uid="uid://dgfkk81gutshc" path="res://Prefabs/Enemies/EnemyPuppetMaster.tscn" id="8_8hr2p"]
+[ext_resource type="Script" path="res://Scripts/EnemyPuppetMaster.gd" id="8_x5q0t"]
 
 [sub_resource type="Shader" id="Shader_417ap"]
 code = "shader_type canvas_item;
@@ -70,4 +70,5 @@ position = Vector2(1417, 447)
 
 [node name="UI" parent="." instance=ExtResource("5_kdaxl")]
 
-[node name="PuppetMaster" parent="." instance=ExtResource("8_8hr2p")]
+[node name="PuppetMaster" type="Node" parent="."]
+script = ExtResource("8_x5q0t")

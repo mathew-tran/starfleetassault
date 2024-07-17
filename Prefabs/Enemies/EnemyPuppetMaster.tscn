@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgfkk81gutshc"]
+
+[ext_resource type="Script" path="res://Scripts/EnemyPuppetMaster.gd" id="1_yhauk"]
+
+[node name="PuppetMaster" type="Node"]
+script = ExtResource("1_yhauk")
+
+[node name="FormTimer" type="Timer" parent="."]
+one_shot = true
