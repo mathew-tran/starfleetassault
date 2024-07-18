@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4ggjwqlltet8"]
+[gd_scene load_steps=10 format=3 uid="uid://d4ggjwqlltet8"]
 
 [ext_resource type="Texture2D" uid="uid://b1j1d7k7f0mpt" path="res://Art/PlayerShip.svg" id="1_g33fe"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_nvk0n"]
@@ -10,6 +10,9 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="Gradient" id="Gradient_1f72w"]
 colors = PackedColorArray(3.65794e-06, 0.574138, 0.824301, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nykoj"]
+radius = 38.71
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6605"]
 size = Vector2(79, 50)
@@ -34,6 +37,9 @@ rotation = 1.5708
 texture = ExtResource("1_g33fe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="SmokeParticles" type="CPUParticles2D" parent="."]
 show_behind_parent = true
@@ -75,7 +81,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_o6605")
+shape = SubResource("CircleShape2D_nykoj")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

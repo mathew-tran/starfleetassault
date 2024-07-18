@@ -8,6 +8,7 @@ var BoostSpeedModifier = 1000
 @onready var SmokeParticle = $SmokeParticles
 @onready var SpeedSmokeParticle = $SmokeParticles2
 @onready var Sprite = $Sprite2D
+@onready var Camera = $Camera2D
 
 var Cannons : Array[Node2D]
 
@@ -59,7 +60,8 @@ func _physics_process(delta):
 
 	Move(delta)
 	SmokeParticle.emitting = true
-	move_and_slide()
+	if move_and_slide():
+		velocity *= .9
 
 func Move(delta):
 	var targetPosition = get_global_mouse_position()
@@ -68,6 +70,7 @@ func Move(delta):
 
 	if IsStopping(targetPosition):
 		velocity *= .9
+
 
 
 	var SpeedToMove = MoveSpeed
@@ -96,10 +99,10 @@ func _input(event):
 
 	if event.is_action_pressed("left_click"):
 		Shoot()
-	if event.is_action_pressed("right_click"):
+	if Input.is_action_pressed("right_click"):
 		$SpeedTimer.start()
 
-	if event.is_action_released("right_click"):
+	if Input.is_action_just_released("right_click"):
 		$SpeedTimer.stop()
 
 func Shoot():
