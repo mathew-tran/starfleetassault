@@ -71,14 +71,12 @@ func AIAttack(delta):
 
 func AIFollowPath(delta):
 	CurrentState = STATE.IN_PROCESS
-	print(FollowPath.curve.get_baked_points())
 	for path in FollowPath.curve.get_baked_points():
 		var tween = get_tree().create_tween()
 		var distance = global_position.distance_to(path)
 		var time = distance / MoveSpeed
 		tween.tween_property(self, "global_position", path, time)
 		await tween.finished
-		print(path)
 
 	ChangeState(STATE.IDLE)
 

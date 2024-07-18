@@ -19,17 +19,17 @@ position = Vector2(837, -803)
 scale = Vector2(75, 20)
 
 [node name="Wall2" parent="Barrier" instance=ExtResource("1_4cvjo")]
-position = Vector2(-1969, 1122)
+position = Vector2(-2534, 1150)
 rotation = -1.57079
 scale = Vector2(75, 20)
 
 [node name="Wall3" parent="Barrier" instance=ExtResource("1_4cvjo")]
-position = Vector2(2774, 2507)
+position = Vector2(2785, 2569)
 rotation = 1.57079
 scale = Vector2(75, 20)
 
 [node name="Wall4" parent="Barrier" instance=ExtResource("1_4cvjo")]
-position = Vector2(-32, 4432)
+position = Vector2(-587, 4522)
 scale = Vector2(75, 20)
 
 [node name="EntryPaths" type="Node2D" parent="." groups=["EntryPaths"]]
