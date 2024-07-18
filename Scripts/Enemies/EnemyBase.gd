@@ -5,7 +5,7 @@ class_name EnemyBase
 var Health : HealthComponent
 
 var TargetPosition = Vector2.ZERO
-var MoveSpeed = 400
+var MoveSpeed = 800
 
 enum STATE {
 	IDLE,

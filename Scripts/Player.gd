@@ -1,10 +1,12 @@
-extends Area2D
+extends CharacterBody2D
 
 class_name Player
 
 var MoveSpeed = 500
 var BoostSpeedModifier = 1000
+
 @onready var SmokeParticle = $SmokeParticles
+@onready var SpeedSmokeParticle = $SmokeParticles2
 @onready var Sprite = $Sprite2D
 
 var Cannons : Array[Node2D]
@@ -57,23 +59,36 @@ func _physics_process(delta):
 
 	Move(delta)
 	SmokeParticle.emitting = true
+	move_and_slide()
 
 func Move(delta):
 	var targetPosition = get_global_mouse_position()
 	var direction = (targetPosition - global_position).normalized()
 	rotation_degrees = rad_to_deg(direction.angle())
 
-	if Input.is_action_pressed("stop"):
-		return
+	if IsStopping(targetPosition):
+		velocity *= .9
 
-	if targetPosition.distance_to(global_position) < MoveSpeed / 5:
-		return
 
 	var SpeedToMove = MoveSpeed
 	if HasSpeedBoost():
 		SpeedToMove += BoostSpeedModifier
-	global_position += direction * SpeedToMove * delta
+		SpeedSmokeParticle.emitting = true
+	else:
+		SpeedSmokeParticle.emitting = false
 
+	velocity += direction * SpeedToMove * delta
+
+	if velocity.length() > GetMaxSpeed():
+		velocity = velocity.normalized() * GetMaxSpeed()
+
+func GetMaxSpeed():
+	if HasSpeedBoost():
+		return 1000
+	else:
+		return 500
+func IsStopping(targetPosition):
+	return Input.is_action_pressed("stop") or targetPosition.distance_to(global_position) < MoveSpeed / 10
 
 func _input(event):
 	if CanPlayerMove() == false:
@@ -82,9 +97,10 @@ func _input(event):
 	if event.is_action_pressed("left_click"):
 		Shoot()
 	if event.is_action_pressed("right_click"):
-		if CanBoost():
-			$SpeedTimer.start()
-			scale = Vector2(1,.5)
+		$SpeedTimer.start()
+
+	if event.is_action_released("right_click"):
+		$SpeedTimer.stop()
 
 func Shoot():
 	for cannon in Cannons:
@@ -94,27 +110,15 @@ func Shoot():
 		Groups.GetBullets().add_child(instance)
 
 func CanBoost():
-	return $SpeedTimer.time_left == 0.0 and $SpeedCooldownTimer.time_left == 0.0
+	return $SpeedTimer.time_left == 0.0
 
 func HasSpeedBoost():
 	return $SpeedTimer.time_left != 0.0
 
-func _on_speed_timer_timeout():
-	modulate = Color.DARK_GRAY
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate", Color.LIGHT_GRAY, $SpeedCooldownTimer.wait_time)
-
-	$SpeedCooldownTimer.start()
-	scale = Vector2(1,.7)
 
 
 
-func _on_speed_cooldown_timer_timeout():
-	scale = Vector2(1,1)
-	modulate = Color.WHITE
-
-
-func _on_area_entered(area):
+func _on_area_2d_area_entered(area):
 	if area.has_method("GetDamage"):
 		if bHasTakenHit == false:
 			Health.TakeDamage(area.GetDamage())

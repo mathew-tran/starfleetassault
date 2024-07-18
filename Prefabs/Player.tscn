@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d4ggjwqlltet8"]
+[gd_scene load_steps=8 format=3 uid="uid://d4ggjwqlltet8"]
 
 [ext_resource type="Texture2D" uid="uid://b1j1d7k7f0mpt" path="res://Art/PlayerShip.svg" id="1_g33fe"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_nvk0n"]
@@ -8,13 +8,17 @@
 [sub_resource type="Gradient" id="Gradient_2jm4i"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="Gradient" id="Gradient_1f72w"]
+colors = PackedColorArray(3.65794e-06, 0.574138, 0.824301, 1, 1, 1, 1, 0)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6605"]
 size = Vector2(79, 50)
 
-[node name="Player" type="Area2D" groups=["Player"]]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(877, 445)
 collision_layer = 2
-collision_mask = 21
+collision_mask = 32
+motion_mode = 1
 script = ExtResource("1_nvk0n")
 metadata/_edit_group_ = true
 
@@ -27,9 +31,9 @@ rotation = 1.5708
 texture = ExtResource("1_g33fe")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
 
 [node name="SmokeParticles" type="CPUParticles2D" parent="."]
+show_behind_parent = true
 position = Vector2(-40, 0)
 emitting = false
 amount = 50
@@ -41,6 +45,21 @@ gravity = Vector2(0, 0)
 angle_max = 180.0
 color_ramp = SubResource("Gradient_2jm4i")
 
+[node name="SmokeParticles2" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-40, 0)
+emitting = false
+amount = 50
+one_shot = true
+texture = ExtResource("3_ewbjk")
+emission_shape = 3
+emission_rect_extents = Vector2(4, 4)
+gravity = Vector2(0, 0)
+angle_max = 180.0
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_1f72w")
+
 [node name="Cannon1" type="Marker2D" parent="."]
 position = Vector2(12, -18)
 
@@ -51,14 +70,16 @@ position = Vector2(12, 18)
 wait_time = 3.0
 one_shot = true
 
-[node name="SpeedCooldownTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_o6605")
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
-[connection signal="timeout" from="SpeedCooldownTimer" to="." method="_on_speed_cooldown_timer_timeout"]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_o6605")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

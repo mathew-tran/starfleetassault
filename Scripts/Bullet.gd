@@ -8,7 +8,7 @@ enum OWNER {
 }
 @export var Owner : OWNER
 @export var Damage = 1
-@export var Speed = 1000
+@export var Speed = 3000
 var Direction = Vector2.ZERO
 
 func _ready():
