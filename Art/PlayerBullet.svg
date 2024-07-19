@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="4.9178543"
+   width="10.481765"
    height="39.342815"
-   viewBox="0 0 1.3011823 10.409453"
+   viewBox="0 0 2.7733003 10.409453"
    version="1.1"
    id="svg1"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
-   sodipodi:docname="TestScene.svg"
+   sodipodi:docname="PlayerBullet.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -36,8 +36,8 @@
     <inkscape:grid
        id="grid1"
        units="mm"
-       originx="-16.655125"
-       originy="-2.8625995"
+       originx="-16.655124"
+       originy="-2.8625996"
        spacingx="48"
        spacingy="48"
        empcolor="#0099e5"
@@ -81,7 +81,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-16.655125,-2.8625996)">
+     transform="translate(-16.655124,-2.8625996)">
     <g
        id="g5"
        transform="matrix(0.82787102,0,0,1,2.1463247,-0.14917352)">
@@ -137,9 +137,9 @@
          inkscape:export-xdpi="96"
          inkscape:export-ydpi="96" />
       <rect
-         style="fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke-width:0.549525;stroke-linecap:square;stroke-linejoin:round;paint-order:stroke fill markers"
+         style="fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke-width:0.802263;stroke-linecap:square;stroke-linejoin:round;paint-order:stroke fill markers"
          id="rect9"
-         width="1.5717202"
+         width="3.3499186"
          height="10.409453"
          x="17.525434"
          y="3.0117731"
